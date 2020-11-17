@@ -1,0 +1,1 @@
+INSERT INTO EQUIPMENT.Equipment(EquipmentNumber) VALUES('1234');
