@@ -1,0 +1,35 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: ws-oneplatform-equipment
+spec:
+  selector:
+    matchLabels:
+      app: ws-oneplatform-equipment
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: ws-oneplatform-equipment
+    spec:
+      containers:
+        - name: ws-oneplatform-equipment
+          image: 'gcr.io/mlteam-building-1000134890/ws-oneplatform-equipment:v1'
+          ports:
+            - containerPort: 8080
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: ws-oneplatform-equipment-service
+  labels:
+    name: ws-oneplatform-equipment-service
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+      protocol: TCP
+  selector:
+    app: ws-oneplatform-equipment
+  type: LoadBalancer
